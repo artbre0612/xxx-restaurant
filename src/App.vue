@@ -1,7 +1,7 @@
-<script setup></script>
-
 <template>
-	<h1 class="text-3xl font-bold underline">Hello world!</h1>
+  <TestPlugins />
 </template>
 
-<style scoped></style>
+<script setup>
+import TestPlugins from '@/components/TestPlugins.vue'
+</script>
