@@ -8,7 +8,13 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.22",
@@ -22,6 +28,8 @@
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/eslint-config-prettier": "^9.0.0",
     "autoprefixer": "^10.4.19",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
     "postcss": "^8.4.38",
