@@ -1,7 +1,34 @@
 <template>
-  <TestPlugins />
+  <div id="app">
+    <component :is="currentLayout" v-if="currentLayout">
+      <router-view />
+    </component>
+  </div>
 </template>
 
 <script setup>
-import TestPlugins from '@/components/TestPlugins.vue'
+import DefaultLayout from './layouts/DefaultLayout.vue'
+import LoginLayout from './layouts/LoginLayout.vue'
+import PosLayout from './layouts/PosLayout.vue'
+
+const route = useRoute()
+const currentLayout = ref(null)
+
+watchEffect(() => {
+  switch (route.meta.layout) {
+    case DefaultLayout:
+      currentLayout.value = markRaw(DefaultLayout)
+      break
+    case LoginLayout:
+      currentLayout.value = markRaw(LoginLayout)
+      break
+    case PosLayout:
+      currentLayout.value = markRaw(PosLayout)
+      break
+  }
+
+  if (route.meta.layout === DefaultLayout) {
+    currentLayout.value = markRaw(DefaultLayout)
+  }
+})
 </script>
