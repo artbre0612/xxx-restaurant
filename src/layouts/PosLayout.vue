@@ -5,16 +5,17 @@
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <a-menu-item key="1">
           <user-outlined />
-          <span>nav 1</span>
+          <span><router-link :to="{ name: 'pos' }">Pos</router-link></span>
         </a-menu-item>
         <a-menu-item key="2">
           <video-camera-outlined />
-          <span>nav 2</span>
+          <span><router-link :to="{ name: 'orders' }">Orders</router-link></span>
         </a-menu-item>
         <a-menu-item key="3">
           <upload-outlined />
-          <span>nav 3</span>
+          <span><router-link :to="{ name: 'manage-menu' }">Manage menu</router-link></span>
         </a-menu-item>
+        <a-menu-item key="4"> 🙌{{ storeAuth.userData.email }} </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
@@ -41,7 +42,18 @@
   </a-layout>
 </template>
 <script setup>
-import { ref } from 'vue'
+import {
+  UserOutlined,
+  VideoCameraOutlined,
+  UploadOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined
+} from '@ant-design/icons-vue'
+
+/* store */
+import { useStoreAuth } from '@/stores/storeAuth'
+const storeAuth = useStoreAuth()
+
 const selectedKeys = ref(['1'])
 const collapsed = ref(false)
 </script>

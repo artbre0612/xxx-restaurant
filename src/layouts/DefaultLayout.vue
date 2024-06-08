@@ -1,6 +1,14 @@
 <template>
   <div class="default-layout">
-    <header>Default Header</header>
+    <header>
+      <div v-if="storeAuth.userData.email">🙌{{ storeAuth.userData.email }}</div>
+
+      <a-button><router-link :to="{ name: 'menu' }">menu</router-link></a-button>
+      <a-button><router-link :to="{ name: 'cart' }">cart</router-link></a-button>
+      <a-button><router-link :to="{ name: 'checkout' }">checkout</router-link></a-button>
+      <a-button><router-link :to="{ name: 'my-order' }">my order</router-link></a-button>
+      <a-button danger><router-link :to="{ name: 'pos' }">Pos</router-link></a-button>
+    </header>
     <main>
       <slot></slot>
       <!-- 內容插槽，讓子組件填充 -->
@@ -10,7 +18,9 @@
 </template>
 
 <script setup>
-// 可以在這裡添加佈局相關的邏輯
+/* store */
+import { useStoreAuth } from '@/stores/storeAuth'
+const storeAuth = useStoreAuth()
 </script>
 
 <style scoped>
