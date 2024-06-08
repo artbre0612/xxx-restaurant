@@ -7,10 +7,12 @@
 </template>
 
 <script setup>
+// imports
 import DefaultLayout from './layouts/DefaultLayout.vue'
 import LoginLayout from './layouts/LoginLayout.vue'
 import PosLayout from './layouts/PosLayout.vue'
 
+/* change layout base on route.meta.layout */
 const route = useRoute()
 const currentLayout = ref(null)
 

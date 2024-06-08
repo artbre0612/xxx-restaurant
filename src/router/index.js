@@ -1,13 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router'
-// view components
-import ViewLogin from '@/views/ViewLogin.vue'
-import ViewMenu from '@/views/ViewMenu.vue'
-import ViewCart from '@/views/ViewCart.vue'
-import ViewCheckout from '@/views/ViewCheckout.vue'
-import ViewMyOrder from '@/views/ViewMyOrder.vue'
-import ViewPos from '@/views/ViewPos.vue'
-import ViewOrders from '@/views/ViewOrders.vue'
-import ViewManageMenu from '@/views/ViewManageMenu.vue'
+import { useStoreAuth } from '@/stores/storeAuth'
 // layouts
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import LoginLayout from '@/layouts/LoginLayout.vue'
@@ -15,59 +7,54 @@ import PosLayout from '@/layouts/PosLayout.vue'
 
 const routes = [
   // public routes
+
   {
     path: '/',
-    name: 'home',
-    component: ViewLogin,
-    meta: { requiresAuth: false, layout: LoginLayout } //temp
+    name: 'menu',
+    component: () => import('@/views/ViewMenu.vue'),
+    meta: { requiresAuth: false, layout: DefaultLayout }
   },
   {
     path: '/login',
     name: 'login',
-    component: ViewLogin,
+    component: () => import('@/views/ViewLogin.vue'),
     meta: { requiresAuth: false, layout: LoginLayout }
-  },
-  {
-    path: '/menu',
-    name: 'menu',
-    component: ViewMenu,
-    meta: { requiresAuth: false, layout: DefaultLayout }
   },
   {
     path: '/cart',
     name: 'cart',
-    component: ViewCart,
+    component: () => import('@/views/ViewCart.vue'),
     meta: { requiresAuth: false, layout: DefaultLayout }
   },
   {
     path: '/checkout',
     name: 'checkout',
-    component: ViewCheckout,
+    component: () => import('@/views/ViewCheckout.vue'),
     meta: { requiresAuth: false, layout: DefaultLayout }
   },
   {
     path: '/my-order',
     name: 'my-order',
-    component: ViewMyOrder,
+    component: () => import('@/views/ViewMyOrder.vue'),
     meta: { requiresAuth: false, layout: DefaultLayout }
   },
   // private routes
   {
     path: '/pos',
     name: 'pos',
-    component: ViewPos,
+    component: () => import('@/views/ViewPos.vue'),
     meta: { requiresAuth: true, layout: PosLayout }
   },
   {
     path: '/orders',
     name: 'orders',
-    component: ViewOrders,
+    component: () => import('@/views/ViewOrders.vue'),
     meta: { requiresAuth: true, layout: PosLayout }
   },
   {
     path: '/manage-menu',
     name: 'manage-menu',
-    component: ViewManageMenu,
+    component: () => import('@/views/ViewManageMenu.vue'),
     meta: { requiresAuth: true, layout: PosLayout }
   }
 ]
@@ -75,6 +62,16 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+// check if user is Authed when router change
+router.beforeEach((to) => {
+  const storeAuth = useStoreAuth()
+  if (to.meta.requiresAuth && !storeAuth.userData.id) {
+    router.push({ name: 'login' })
+  } else if (storeAuth.userData.id && to.name === 'login') {
+    router.push({ name: 'pos' })
+  }
 })
 
 export default router
