@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <LoginModal />
     <component :is="currentLayout" v-if="currentLayout">
       <router-view />
     </component>
@@ -11,6 +12,7 @@
 import DefaultLayout from './layouts/DefaultLayout.vue'
 import LoginLayout from './layouts/LoginLayout.vue'
 import PosLayout from './layouts/PosLayout.vue'
+import LoginModal from './components/LoginModal.vue'
 
 /* change layout base on route.meta.layout */
 const route = useRoute()

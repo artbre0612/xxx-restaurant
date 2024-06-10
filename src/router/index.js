@@ -1,5 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import { useStoreAuth } from '@/stores/storeAuth'
+import { useStoreModal } from '@/stores/storeModal'
+
 // layouts
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import LoginLayout from '@/layouts/LoginLayout.vue'
@@ -67,8 +69,11 @@ const router = createRouter({
 // check if user is Authed when router change
 router.beforeEach((to) => {
   const storeAuth = useStoreAuth()
+  const storeModal = useStoreModal()
   if (to.meta.requiresAuth && !storeAuth.userData.id) {
-    router.push({ name: 'login' })
+    // control modal open state
+    storeModal.open = true
+    return false
   } else if (storeAuth.userData.id && to.name === 'login') {
     router.push({ name: 'pos' })
   }
