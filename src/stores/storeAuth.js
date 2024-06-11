@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { auth } from '@/js/firebase'
+import { message } from 'ant-design-vue'
 
 export const useStoreAuth = defineStore('storeAuth', () => {
   // user data
@@ -25,11 +26,12 @@ export const useStoreAuth = defineStore('storeAuth', () => {
   function loginUser(formState) {
     signInWithEmailAndPassword(auth, formState.email, formState.password)
       .then(() => {
+        message.success(`嗨! ${formState.email}，您已成功登入`, 2)
         this.router.push({ name: 'pos' })
       })
       .catch((error) => {
         console.log('errorMessage', error.message)
-        alert('帳號或密碼不正確，請再試一次')
+        message.error('電子郵件或密碼不正確，請再試一次', 1)
       })
   }
 
@@ -37,6 +39,7 @@ export const useStoreAuth = defineStore('storeAuth', () => {
   function logoutUser() {
     signOut(auth)
       .then(() => {
+        message.success('您已成功登出', 1)
         this.router.push({ name: 'menu' })
       })
       .catch((error) => {
