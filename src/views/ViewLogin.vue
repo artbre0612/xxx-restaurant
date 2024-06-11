@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen flex flex-col justify-center items-center max-w-screen-lg">
     <div
-      class="grid grid-cols-1 p-4 bg-white rounded-md shadow-md md:grid-cols-2 md:gap-4 md:items-center md:p-8"
+      class="grid grid-cols-1 px-6 pt-10 bg-white rounded-md shadow-md md:grid-cols-2 md:gap-4 md:items-center md:p-8"
     >
       <div>
         <img
@@ -39,24 +39,27 @@
           <a-input-password class="py-2" v-model:value="formState.password" />
         </a-form-item>
 
-        <div class="grid md:place-items-end">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
           <button
-            class="w-full mt-8 mb-4 py-4 rounded-lg shadow-md cursor-pointer bg-slate-500 text-white text-2xl hover:bg-slate-400 duration-300 active:shadow-inner disabled:opacity-30 disabled:cursor-not-allowed md:w-1/2"
-            type="primary"
-            html-type="submit"
+            class="w-full mt-4 py-4 rounded-lg shadow-md cursor-pointer bg-slate-500 text-white text-2xl hover:bg-slate-400 duration-300 active:shadow-inner disabled:opacity-30 disabled:cursor-not-allowed md:col-span-2"
+            type="submit"
             :disabled="disabled"
           >
             登入
           </button>
-        </div>
-        <div class="text-slate-500 text-lg mt-4">
-          <router-link
-            :to="{ name: 'menu' }"
-            class="hover:text-slate-500 flex items-center justify-end gap-2"
+          <button
+            class="w-full mt-4 py-2 rounded-lg shadow-md cursor-pointer bg-slate-500 text-white opacity-30 text-2xl hover:bg-slate-400 duration-300 active:shadow-inner hover:opacity-100"
+            type="submit"
+            :disabled="disabled"
           >
-            回到菜單
-            <ReadOutlined />
-          </router-link>
+            <router-link
+              :to="{ name: 'menu' }"
+              class="flex items-center text-white justify-center gap-2 hover:text-white active:text-white"
+            >
+              回到菜單
+              <ReadOutlined />
+            </router-link>
+          </button>
         </div>
       </a-form>
     </div>
