@@ -28,7 +28,7 @@
             }
           ]"
         >
-          <a-input class="py-2" v-model:value="formState.email" />
+          <a-input v-model:value="formState.email" size="large" class="md:h-8" />
         </a-form-item>
 
         <a-form-item
@@ -36,30 +36,25 @@
           name="password"
           :rules="[{ required: true, message: '請輸入密碼!' }]"
         >
-          <a-input-password class="py-2" v-model:value="formState.password" />
+          <a-input-password v-model:value="formState.password" size="large" class="md:h-8" />
         </a-form-item>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <button
-            class="w-full mt-4 py-4 rounded-lg shadow-md cursor-pointer bg-slate-500 text-white text-2xl hover:bg-slate-400 duration-300 active:shadow-inner disabled:opacity-30 disabled:cursor-not-allowed md:col-span-2"
+          <a-button
+            class="flex items-center justify-center text-lg text-white bg-slate-500 py-6 disabled:cursor-not-allowed disabled:opacity-30 md:col-span-2 hover:bg-slate-400 md:order-2 md:py-5 md:text-base"
             type="submit"
             :disabled="disabled"
           >
             登入
-          </button>
-          <button
-            class="w-full mt-4 py-2 rounded-lg shadow-md cursor-pointer bg-slate-500 text-white opacity-30 text-2xl hover:bg-slate-400 duration-300 active:shadow-inner hover:opacity-100"
-            type="submit"
-            :disabled="disabled"
+          </a-button>
+
+          <a-button
+            type="link"
+            @click="$router.push({ name: 'menu' })"
+            class="flex items-center justify-center text-lg text-white bg-slate-500 py-6 hover:bg-slate-400 md:order-1 md:py-5 md:text-base"
           >
-            <router-link
-              :to="{ name: 'menu' }"
-              class="flex items-center text-white justify-center gap-2 hover:text-white active:text-white"
-            >
-              回到菜單
-              <ReadOutlined />
-            </router-link>
-          </button>
+            回到菜單<ReadOutlined />
+          </a-button>
         </div>
       </a-form>
     </div>
@@ -83,9 +78,11 @@ const disabled = computed(() => {
 })
 </script>
 
-<style>
-.ant-form-item .ant-form-item-label > label {
-  font-size: 18px;
-  color: rgb(100, 116, 139);
+<style scoped>
+.ant-form-item-label label {
+  font-size: 30px;
+}
+.ant-btn-link:hover {
+  color: white !important;
 }
 </style>

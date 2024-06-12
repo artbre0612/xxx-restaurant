@@ -3,11 +3,11 @@
     <header>
       <div v-if="storeAuth.userData.email">🙌{{ storeAuth.userData.email }}</div>
 
-      <a-button><router-link :to="{ name: 'menu' }">menu</router-link></a-button>
-      <a-button><router-link :to="{ name: 'cart' }">cart</router-link></a-button>
-      <a-button><router-link :to="{ name: 'checkout' }">checkout</router-link></a-button>
-      <a-button><router-link :to="{ name: 'my-order' }">my order</router-link></a-button>
-      <a-button danger><router-link :to="{ name: 'pos' }">Pos</router-link></a-button>
+      <a-button @click="$router.push({ name: 'menu' })">menu</a-button>
+      <a-button @click="$router.push({ name: 'cart' })">cart</a-button>
+      <a-button @click="$router.push({ name: 'checkout' })">checkout</a-button>
+      <a-button @click="$router.push({ name: 'checkout' })">my order</a-button>
+      <a-button @click="$router.push({ name: 'pos' })" danger>Pos</a-button>
     </header>
     <main>
       <slot></slot>
