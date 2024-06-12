@@ -31,7 +31,7 @@ export const useStoreAuth = defineStore('storeAuth', () => {
       })
       .catch((error) => {
         console.log('errorMessage', error.message)
-        message.error('電子郵件或密碼不正確，請再試一次', 1)
+        message.error('電子郵件或密碼不正確，請再試一次', 2)
       })
   }
 
